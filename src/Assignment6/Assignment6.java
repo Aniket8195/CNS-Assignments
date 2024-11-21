@@ -2,6 +2,7 @@ package Assignment6;
 
 import javax.crypto.Cipher;
 import java.security.*;
+import java.util.Scanner;
 
 public class Assignment6 {
 
@@ -20,7 +21,7 @@ public class Assignment6 {
          Signature signature=Signature.getInstance("SHA256withRSA");
          signature.initSign(xPrivateKey);
          signature.update(message.getBytes());
-            return signature.sign();
+         return signature.sign();
     }
     public static boolean verifySignature(String message, PublicKey xPublicKey, byte[] sign) throws Exception{
           Signature signature=Signature.getInstance("SHA256withRSA");
@@ -49,10 +50,14 @@ public class Assignment6 {
         PublicKey yPublicKey = yKeyPair.getPublic();
         PrivateKey yPrivateKey = yKeyPair.getPrivate();
 
-        String msg="Hello World";
+        //String msg="Hello World";
 
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter the message: ");
+        String msg=sc.nextLine();
         byte[]hash=hashMessage(msg);
         System.out.println("Hash: "+byteToHex(hash));
+
         byte[]signature=signMessage(new String(hash),xPrivateKey);
         System.out.println("Signature: "+byteToHex(signature));
 

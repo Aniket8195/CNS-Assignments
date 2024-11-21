@@ -1,9 +1,17 @@
 package Assignment1;
 
+import java.util.Scanner;
+
 public class Vernam {
     public static void main(String[] args) {
-        String plaintext = "HELLO";
-        String key = "XMCKL";
+       Scanner sc=new Scanner(System.in);
+        System.out.println("Enter the plaintext: ");
+       String msg=sc.nextLine();
+
+        System.out.println("Enter the key: ");
+        String key=sc.nextLine();
+
+        String plaintext = msg;
 
         String encrypted = encrypt(plaintext, key);
         System.out.println("Encrypted: " + encrypted);
@@ -27,7 +35,7 @@ public class Vernam {
             char k = key.charAt(i);
 
             // XOR the characters and convert the result back to a character
-            char c = (char) (p ^ k);
+            char c = (char) ((p ^ k)%Character.MAX_VALUE);
             ciphertext.append(c);
         }
 
@@ -49,7 +57,7 @@ public class Vernam {
             char k = key.charAt(i);
 
             // XOR the characters and convert the result back to a character
-            char p = (char) (c ^ k);
+            char p = (char) ((c ^ k)%Character.MAX_VALUE);
             plaintext.append(p);
         }
 
